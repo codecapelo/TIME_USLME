@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer USLME</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Timer USLME</h1>
+        
+        <div class="timer-display">
+            <div class="time">
+                <span id="minutes">60</span>:<span id="seconds">00</span>
+            </div>
+            <div class="block-info">
+                <span>Bloco: <span id="current-block">1</span>/7</span>
+            </div>
+        </div>
+        
+        <div class="total-time-info">
+            <div class="info-item">
+                <span>Tempo Total: </span>
+                <span id="total-time">00:00:00</span>
+            </div>
+            <div class="info-item">
+                <span>Tempo de Descanso Usado: </span>
+                <span id="total-rest-time">00:00</span>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button id="start-btn">Iniciar</button>
+            <button id="pause-btn" disabled>Pausar</button>
+            <button id="reset-btn">Reiniciar</button>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar">
+                <div id="progress" class="progress"></div>
+            </div>
+            <div class="blocks-indicator">
+                <div class="block active" data-block="1"></div>
+                <div class="block" data-block="2"></div>
+                <div class="block" data-block="3"></div>
+                <div class="block" data-block="4"></div>
+                <div class="block" data-block="5"></div>
+                <div class="block" data-block="6"></div>
+                <div class="block" data-block="7"></div>
+            </div>
+        </div>
+
+        <div class="rest-options" id="rest-options" style="display: none;">
+            <h2>Tempo de Descanso</h2>
+            <p>Deseja fazer uma pausa antes do próximo bloco?</p>
+            <div class="rest-buttons">
+                <button id="rest-yes">Sim</button>
+                <button id="rest-no">Não</button>
+            </div>
+            <div class="rest-timer" style="display: none;">
+                <p>Tempo de descanso: <span id="rest-minutes">0</span>:<span id="rest-seconds">00</span></p>
+            </div>
+        </div>
+
+        <div class="settings">
+            <h3>Configurações</h3>
+            <div class="setting-item">
+                <label for="rest-duration">Duração total do descanso (minutos):</label>
+                <input type="number" id="rest-duration" value="60" min="1" max="120">
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html> 
