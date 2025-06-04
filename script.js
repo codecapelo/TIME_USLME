@@ -14,6 +14,9 @@ class Timer {
         this.totalRestTimeUsed = 0;
         this.totalRestTimeAvailable = this.restDuration * 60; // 60 minutos em segundos
         this.remainingRestTime = this.totalRestTimeAvailable;
+
+        // Array para armazenar o número de questões concluídas em cada bloco
+        this.questionsPerBlock = Array(this.totalBlocks).fill(0);
         
         // Inicializa o som do alarme
         this.alarmSound = new Audio('https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3');
@@ -165,6 +168,8 @@ class Timer {
         this.restOptionsElement.style.display = 'none';
         this.restTimerElement.style.display = 'none';
         this.stopAlarm(); // Para o alarme ao resetar
+        // Limpa as questões registradas
+        this.questionsPerBlock = Array(this.totalBlocks).fill(0);
         this.updateDisplay();
         this.updateProgress();
         this.updateBlocks();
@@ -200,10 +205,20 @@ class Timer {
         this.pauseButton.disabled = true;
         this.playAlarm(); // Toca o alarme ao terminar o bloco
 
+        // Solicita o número de questões feitas neste bloco
+        const resposta = prompt(`Quantas questões você completou no bloco ${this.currentBlock}?`, '0');
+        if (resposta !== null) {
+            const valor = parseInt(resposta);
+            if (!isNaN(valor)) {
+                this.questionsPerBlock[this.currentBlock - 1] = valor;
+            }
+        }
+
         if (this.currentBlock < this.totalBlocks) {
             this.showRestOptions();
         } else {
-            alert('Parabéns! Você completou todos os blocos!');
+            const totalQuestoes = this.questionsPerBlock.reduce((s, q) => s + q, 0);
+            alert(`Parabéns! Você completou todos os blocos!\nTotal de questões resolvidas: ${totalQuestoes}`);
             this.stopAlarm(); // Para o alarme após o alerta
             this.reset();
         }
