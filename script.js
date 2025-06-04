@@ -116,14 +116,14 @@ class Timer {
         this.updateBlocks();
         
         // Mostrar mensagem de confirmação
-        const confirmMessage = `Bloco ${blockNumber} selecionado. Os blocos anteriores serão marcados como concluídos.`;
+        const confirmMessage = `Bloco ${blockNumber} escolhido! Os anteriores serão marcados como concluídos. Bons estudos!`;
         alert(confirmMessage);
     }
 
     start() {
         if (this.isResting) {
             // Se estiver em descanso, interrompe o descanso
-            if (confirm('Deseja realmente interromper o tempo de descanso?')) {
+            if (confirm('Tem certeza de que deseja interromper a pausa agora?')) {
                 this.remainingRestTime += this.restTimeRemaining; // Devolve o tempo não usado
                 this.stopAlarm(); // Para o alarme ao interromper o descanso
                 this.finishRest();
@@ -206,7 +206,7 @@ class Timer {
         this.playAlarm(); // Toca o alarme ao terminar o bloco
 
         // Solicita o número de questões feitas neste bloco
-        const resposta = prompt(`Quantas questões você completou no bloco ${this.currentBlock}?`, '0');
+        const resposta = prompt(`Quantas questões você mandou bem no bloco ${this.currentBlock}?`, '0');
         if (resposta !== null) {
             const valor = parseInt(resposta);
             if (!isNaN(valor)) {
@@ -218,7 +218,7 @@ class Timer {
             this.showRestOptions();
         } else {
             const totalQuestoes = this.questionsPerBlock.reduce((s, q) => s + q, 0);
-            alert(`Parabéns! Você completou todos os blocos!\nTotal de questões resolvidas: ${totalQuestoes}`);
+            alert(`Missão cumprida! Todos os blocos finalizados.\nVocê resolveu ${totalQuestoes} questões!`);
             this.stopAlarm(); // Para o alarme após o alerta
             this.reset();
         }
